@@ -2,8 +2,9 @@ var jsmin = require('jsmin-sourcemap'),
     path = require('path');
 module.exports = function (grunt) {
   grunt.registerMultiTask('jsmin-sourcemap', 'Generate minified JavaScript and sourcemap from files', function () {
+
     // Grab the files to minify
-    var file = this.file,
+    var file = this.files[0],
         data = this.data,
         cwd = data.cwd || '.',
         srcFile = file.src,
@@ -39,7 +40,7 @@ module.exports = function (grunt) {
         relDestDirPath = path.relative(destMapDir, destFileDir),
         relMapPath = path.join(relMapDirPath, destMapName),
         relDestPath = path.join(relDestDirPath, destFileName);
-     
+
     // Convert any '\\'s to '/'s (since we are URL based)
     relMapPath = relMapPath.replace(/\\/g, '/');
     relDestPath = relDestPath.replace(/\\/g, '/');
